@@ -1,6 +1,7 @@
 {
 	"browserName": "chrome",
-	"goog:chromeOptions": {"args": ["disable-infobars", "--ignore-certificate-errors", "start-maximized"], 
+	"goog:chromeOptions": {"args": ["disable-infobars", "--ignore-certificate-errors", "start-maximized", "--user-data-dir=C:\\Users\\nfeme\\AppData\\Local\\Google\\Chrome\\User Data\\Default"],
+		"extensions": [],],
 						   "extensions": [],
 						   "prefs": {"printing.enabled": false}
 	}, 
