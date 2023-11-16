@@ -1,60 +1,38 @@
 package lippia.web.services;
 
+import com.crowdar.core.actions.WebActionManager;
+import lippia.web.constants.HomeConstants;
+import lippia.web.constants.LoginConstants;
+import lippia.web.constants.ShopConstants;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
 import static com.crowdar.core.actions.ActionManager.getElements;
+import static lippia.web.constants.HomeConstants.AGREGAR_CUPON;
+import static lippia.web.constants.HomeConstants.PROCEED_TO_CHEEKOUT_BUTTON_ESPECIFICO;
 
 //import static lippia.web.constants.SuperiorNavigationBarConstants.HOME_BUTTON;
 
 public class HomeService {
 
-//    public static String SLIDE1 = "xpath: "
-//    public static String SLIDE2 = "xpath: "
-//    public static String SLIDE3 = "xpath: "
-//    esos strings son para cada una de las fotos,//quiero hacer click en la --> que se cambie de slide
-////quiero que la pagina comparar el xpath de la imagen del slide con MI LISTA ARAMADA DE SLIDES
-//public void slidesPorVerificar(){
-//        List<String>datitos = new ArrayList<>();
-//            datitos.add(SLIDE1);
-//            datitos.add(SLIDE2);
-//            datitos.add("S");
-//            WebActionManager.getElement()
+    public static void producto() {
+        WebActionManager.click(HomeConstants.PRODUCTO_NEW_ARRIVALS);
+    }
 
-    public static String SLIDES_HOME_PAGE = "xpath://*[@class='n2-ss-slider-3']//img";
-    public static String NEW_ARRIVALS_IMAGENES = "xpath://*[@id='themify_builder_content-22']/div[2]//img";
-    public static void slides() {
+    public static void productoAddtoBasket() {
+        ToolsService.click(HomeConstants.PRODUCTO_ESPECIFICO_ADD_TO_BASKET);
+    }
+    public static void productoViewBasket() {
+        ToolsService.click(HomeConstants.PRODUCTO_ESPECIFICO_VIEW_BASKET);}
 
-        List<WebElement> imagenes;
+    public static void proceedToCheckOutEspecifico() {
+        WebActionManager.click(PROCEED_TO_CHEEKOUT_BUTTON_ESPECIFICO);
+    }
+    public static void cupon(){
+        ToolsService.AssertTrue(AGREGAR_CUPON);
+    }
 
-        imagenes = getElements(SLIDES_HOME_PAGE);
-
-        int cantidadImagenes;
-
-        cantidadImagenes = imagenes.size();
-        System.out.println(cantidadImagenes);
-
-        if (cantidadImagenes==3) {
-            System.out.println("Hay imagenes cargadas en los Slides");
-        } else {
-            System.out.println("No hay imagenes cargadas en los Slides");
-        }
 
     }
 
-    public static void newArrivalsBox(){
-        List<WebElement> imagenes;
-        imagenes = getElements(NEW_ARRIVALS_IMAGENES);
-
-        int cantidadImagenes;
-        cantidadImagenes = imagenes.size();
-        System.out.println();
-
-        if (cantidadImagenes==3){
-            System.out.println("Hay 3 productos en New Arrivals");}
-        else {
-            System.out.println("Error, verificar si estan cargadas las imagenes");
-        }
-    }
-}

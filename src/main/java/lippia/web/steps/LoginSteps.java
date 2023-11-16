@@ -1,48 +1,33 @@
 package lippia.web.steps;
 
 import com.crowdar.core.actions.WebActionManager;
-import com.github.jknack.handlebars.internal.lang3.ObjectUtils;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import lippia.web.constants.LoginConstants;
+import lippia.web.constants.SuperiorNavigationBarConstants;
 import lippia.web.services.LoginService;
+import lippia.web.services.ShopService;
 import lippia.web.services.SuperiorBarNavigationBarService;
+import lippia.web.services.ToolsService;
+import org.openqa.selenium.WebDriver;
+import org.springframework.util.Assert;
 
 public class LoginSteps {
 
-
-    @Given("el usuario clickea en el botón My account")
-    public void elUsuarioClickeaEnElBotonMyAccount() {
-        SuperiorBarNavigationBarService.clickMyAccountBar();
-    }
-    @When("el usuario ingresa un email o usuario registrado (.*)$")
-    public void elUsuarioIngresaUnEmailOUsuarioRegistrado(String emailOUsuario) {
-        LoginService.datosEmailUsuario(emailOUsuario);
-    }
-    @And("el usuario ingresa su contraseña (.*)$")
-    public void elUsuarioIngresaSuContrasena(String contrasena) {
-        LoginService.datosContrasenaUsuario(contrasena);
+    @And("el usuario cambia de pagina")
+    public static void elUsuarioCambiaDePagina() {
+        ShopService.shopBar();
     }
 
-    @And("el usuario clickea en el boton de Login")
-    public void elUsuarioClickeaEnElBotonDeLogin() {
-        LoginService.botonDeLogin();
-    }
-    @Then("el usuario podrá acceder a su cuenta y sera redirigido a otra página")
-    public void elUsuarioPodraAccederASuCuentaYSeraRedirigidoAOtraPagina() {
-        LoginService.usuarioBienvenida();
-    }
-    @When("el usuario ingresa un email o usuario no valido (.*)$")
-    public void elUsuarioIngresaUnEmailOUsuarioNoValido(String usuarioIncorrecto) {
-        LoginService.datosEmailUsuario(usuarioIncorrecto);
-    }
-
-    @Then("el usuario no podrá acceder a su cuenta")
-    public void elUsuarioNoPodraAccederASuCuenta() {
-        LoginService.mensajeError();
-    }
+    @Then("el usuario no podrá acceder a su cuenta (.*)")
+    public void elUsuarioNoPodraAccederASuCuenta(String arg0) {
+        ToolsService.AssertTrue(LoginConstants.MENSAJE_ERROR);
+         }
 
 
-
+    @Then("el usuario no debera loguearse de nuevo y podra ver la pagina con normalidad")
+    public void elUsuarioNoDeberaLoguearseDeNuevoYPodraVerLaPaginaConNormalidad() {
+        ToolsService.AssertTrue(SuperiorNavigationBarConstants.MY_ACCOUNT_BUTTON);
+    }
 }

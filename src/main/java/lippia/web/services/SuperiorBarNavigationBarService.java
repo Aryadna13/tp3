@@ -15,10 +15,5 @@ public class SuperiorBarNavigationBarService extends ActionManager {
     public static void navegarShopPageButton(){
         navigateTo("https://practice.automationtesting.in/shop/");
     }
-    public static void clickShopBar( ) {
-        WebActionManager.click( SHOP_MENU_BUTTON );
-    }
-    public static void clickMyAccountBar( ) {
-        WebActionManager.click(MY_ACCOUNT_BUTTON);
-    }
+
 }

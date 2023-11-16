@@ -1,16 +1,31 @@
-@home_page
+@testing
 Feature: Funcionalidades Home page
-  Las funciones principales de Home page funcionan correctamente
+
   Background:
     Given el usuario ingresa a la URL
 
-  Scenario: La home page solo debe contener tres slides
-    Given el usuario clickea en shop menu button
-    When el usuario clickea en home page button
-    Then se valida que en la home page hay solo tres slides
+  @Cupon
+  Scenario Outline: Agregar un cupon
+    Given el usuario clickea la imagen de un producto de new arrivals
+    And el usuario agrega ese libro especifico a su carrito con el boton Add to basket
+    And el usuario clickea en el boton View Basket del producto elegido
+    When el usuario clickea en el boton Proceed to Checkout del producto
+    And el usuario debera rellenar los campos de compra de Billing Details <FirstName>, <LastName>, <EmailAddress>, <Phone>, <Country>, <Address>, <TownDistrict>, <Region>, <Postcode>
+    Then el usuario podra añadir cupones
 
-  @new_arrivals
-  Scenario: La home page debe contener solo tres productos en "new arrivals"
-    Given el usuario clickea en shop menu
-    When el usuario clickea en home page button
-    Then se valida que en la home page hay solo tres productos en <new arrivals>
+    Examples:
+      | FirstName | LastName | EmailAddress               | Phone      | Country   | Address         | TownDistrict | Region  | Postcode |
+      | Ariadna   | Garcia   | garciaariadna139@gmail.com | 1234567890 | Argentina | Calle Falsa 123 | Mendoza      | Mendoza | 12345    |
+
+  @llegarAConf
+  Scenario Outline: Add to Basket-Items-Check-out-Payment Gateway-Place order
+    Given el usuario clickea la imagen de un producto de new arrivals
+    And el usuario agrega ese libro especifico a su carrito con el boton Add to basket
+    And el usuario clickea en el boton View Basket del producto elegido
+    When el usuario clickea en el boton Proceed to Checkout del producto
+    And el usuario debera rellenar los campos de compra de Billing Details <FirstName>, <LastName>, <EmailAddress>, <Phone>, <Country>, <Address>, <TownDistrict>, <Region>, <Postcode>
+    And el usuario clickea en el boton de Place Order
+    Then el usuario es redirigido a una pagina de confirmacion de pedido
+    Examples:
+      | FirstName | LastName | EmailAddress               | Phone      | Country   | Address         | TownDistrict | Region  | Postcode |
+      | Ariadna   | Garcia   | garciaariadna139@gmail.com | 1234567890 | Argentina | Calle Falsa 123 | Mendoza      | Mendoza | 12345    |

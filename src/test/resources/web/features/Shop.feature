@@ -1,16 +1,25 @@
-@shop_page
+@testing
 Feature: Funcionalidades de Shop page
+
   Background:
-    Given el usuario ingresa a la homepage
+    Given el usuario ingresa a la URL
+    And el usuario clickea en shop menu
 
-  @product_category
-  Scenario: Filtrar productos con la funcionalidad Product category
-    Given el usuario clickea en shop menu button
-    When el usuario clickea en una opción de Product category
-    Then el usuario podra ver solo los productos filtrados
+  @linkDesdeShop
+  Scenario Outline: Llegar al carrito de compras a traves del link de un item
+    Given el usurario clickea en el boton Add to basket de un producto
+    And el usuario clickea en el boton View Basket
+    When el usuario clickea en el boton Proceed to Checkout
+    And el usuario debera rellenar los campos de compra de Billing Details <FirstName>, <LastName>, <EmailAddress>, <Phone>, <Country>, <Address>, <TownDistrict>, <Region>, <Postcode>
+    And el usuario clickea en el boton de Place Order
+    Then el usuario es redirigido a una pagina de confirmacion de pedido
+    Examples:
+      | FirstName | LastName | EmailAddress               | Phone      | Country   | Address         | TownDistrict | Region  | Postcode |
+      | Ariadna   | Garcia   | garciaariadna139@gmail.com | 1234567890 | Argentina | Calle Falsa 123 | Mendoza      | Mendoza | 12345    |
 
-  @add_to_basket
-  Scenario: Añadir cualquier producto al carrito con el botón Add to basket
-    Given el usuario clickea en shop menu button
-    When el usurario clickea en el boton Add to basket
-    Then deberá añadirse una unidad del producto elegido a su carrito de compras
+  @tax
+  Scenario: Verificar el tax
+    Given el usurario clickea en el boton Add to basket de un producto
+    When el usuario clickea en el boton View Basket
+    Then el usuario podra verificar el impuesto de su compra
+
